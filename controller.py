@@ -98,7 +98,7 @@ class Main:
                 space_removed = self.remove_blocks_of_five(con_str)
                 kw = keyword.Keyword(space_removed,
                                      one_time_pad.Otp([int(num) for num in usr_otp]).get_otp(choices_dict))
-            # possible memory leak find out why ?
+            # TODO: possible memory leak find out why ?
             print("Your decrypted message: {}".format(kw.decrypt[:len(space_removed)]))
         else:
             raise ValueError("'{}' is not a valid choice, you can either (E)ncrypt or (D)ecrypt.".format(con_cho))
