@@ -7,6 +7,7 @@ class Runnable:
     is_runnable = True
 
     def run(self):
+        os.system("clear")
         try:
             while self.is_runnable:
                 main = Main()
