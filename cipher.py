@@ -6,6 +6,9 @@ logging.getLogger().setLevel(logging.INFO)
 
 
 class Cipher:
+    """
+    Super class
+    """
 
     orig_dict = {}
 
@@ -21,6 +24,7 @@ class Cipher:
                 del self.secret_string[self.index]
                 self.secret_string.insert(self.index, "_")
             self.index += 1
+        print("incoming String : {} ".format(self.secret_string))
 
         # Reading original positions from user fed csv file.
         with open("original_assigned.csv", "r") as orig_csv:
@@ -29,6 +33,12 @@ class Cipher:
                 # Creating dicts from csv data
                 for k, v in row.items():
                     self.orig_dict[k] = v
+
+    def encrypt(self):
+        raise NotImplementedError()
+
+    def decrypt(self):
+        raise NotImplementedError()
 
     # Returns dict for original positions for messages
     def get_orig_dict(self):

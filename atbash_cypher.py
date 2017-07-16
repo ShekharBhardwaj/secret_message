@@ -65,6 +65,10 @@ class Atbash(Cipher):
         for adjusted_index in otp_adjusted_index:
             for k, v in originals.items():
                 if v == adjusted_index:
-                    adjusted_atbash_letters.append(k)
+                    if k == "_":
+                        adjusted_atbash_letters.append(" ")
+                    else:
+                        adjusted_atbash_letters.append(k)
+
         return ''.join(adjusted_atbash_letters)
 
