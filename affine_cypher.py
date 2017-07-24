@@ -4,9 +4,14 @@ import one_time_pad as pad
 
 logging.getLogger().setLevel(logging.INFO)
 
-originals = {":": 0, "A": 1, "B": 2, "C": 3, "D": 4, "E": 5, "F": 6, "G": 7, "H": 8, "I": 9, "J": 10, "K": 11, "L": 12,
-             "M": 13, "N": 14, "O": 15, "P": 16, "Q": 17, "R": 18, "S": 19, "T": 20, "U": 21, "V": 22, "W": 23, "X": 24,
-             "Y": 25, "Z": 26, "_": 27, "!": 28, "@": 29, "#": 30, "$": 31, "%": 32, "^": 33, "&": 34, "*": 35, "?": 36}
+originals = {":": 0, "A": 1, "B": 2, "C": 3, "D": 4,
+             "E": 5, "F": 6, "G": 7, "H": 8, "I": 9,
+             "J": 10, "K": 11, "L": 12, "M": 13, "N": 14,
+             "O": 15, "P": 16, "Q": 17, "R": 18, "S": 19,
+             "T": 20, "U": 21, "V": 22, "W": 23, "X": 24,
+             "Y": 25, "Z": 26, "_": 27, "!": 28, "@": 29,
+             "#": 30, "$": 31, "%": 32, "^": 33, "&": 34,
+             "*": 35, "?": 36}
 
 
 class Affine(Cipher):
@@ -53,25 +58,21 @@ class Affine(Cipher):
         real_nums = []
         real_str_list = []
         # applying reverse formula to get actual value from received number
-        print("sent numbers : {}".format(dec_num))
         for datum in dec_num:
             if datum == 27:
                 mod_num = 27
             else:
                 mod_num = 21 * (datum - 8) % 26
             real_nums.append(mod_num)
-        print("collected num : {}".format(real_nums))
         # retrieving real letters of string from original dict
         for datum in real_nums:
             real_str_list.append(self.e_strlogix(datum))
-        print("before - replace : {}".format(real_str_list))
         index = 0
         for datum in real_str_list:
             if datum == "_":
                 del real_str_list[index]
                 real_str_list.insert(index, " ")
             index += 1
-        print("d_strlogix : {}".format(real_str_list))
         return real_str_list
 
     @property
@@ -82,7 +83,6 @@ class Affine(Cipher):
         """
         sec_num_list = pad.otp_shifts([self.e_numlogix(datum) for datum in self.secret_string], self.otp)
         encrypted_list_str = [self.e_strlogix(datum) for datum in sec_num_list]
-        print("encrypted string : {}".format(encrypted_list_str))
         return ''.join(encrypted_list_str)
 
     @property
@@ -93,15 +93,12 @@ class Affine(Cipher):
         """
         num_list = pad.otp_shifts([self.d_numlogix(datum) for datum in self.secret_string], self.otp)
         de_list_str = self.d_strlogix(num_list)
-        print("decrypted string : {}".format(de_list_str))
         return ''.join(de_list_str)
-
 
 
 if __name__ == "__main__":
     aff = Affine(['S', 'H', 'E', 'K', 'H', 'A', 'R'], [2, 2, 3])
     print(aff.encryption())
-
     aff1 = Affine(aff.encryption(), [-2, -2, -3])
     print(aff1.decryption())
 

@@ -21,7 +21,8 @@ class Keyword(Cipher):
     def get_secret_numbers(self, switch_dict):
         """spits out secret number after applying otp."""
         logging.debug("in Keyword sec_kw_dict {}".format(self.sec_kw_dict))
-        # Generating secret number based on alphabet position in fed csv file and returning the position numbers.
+        # Generating secret number based on alphabet position
+        # in fed csv file and returning the position numbers.
         logging.debug("Secret string in Keyword: {}s".format(self.secret_string))
         for letter in self.secret_string:
             self.secret_numbers.append(switch_dict.get(letter))
@@ -47,9 +48,11 @@ class Keyword(Cipher):
             for row in reader_ekw:
                 for k, v in row.items():
                     self.sec_kw_dict[k] = v
-        # Looping through all the secret numbers, numbers here are based on secret cipher positioning
+        # Looping through all the secret numbers,
+        # numbers here are based on secret cipher positioning
         for num in self.get_secret_numbers(self.sec_kw_dict):
-            # Encrypting data based on letter's position in cipher based original csv secret numbers
+            # Encrypting data based on letter's position
+            # in cipher based original csv secret numbers
             for k, v in self.get_orig_dict().items():
                 if num == v:
                     self.enc_string.append(k)
@@ -64,7 +67,8 @@ class Keyword(Cipher):
             for row in reader_dkw:
                 for k, v in row.items():
                     self.sec_kw_dict[k] = v
-        logging.debug("secret number length in decrypt: {}".format(len(self.secret_numbers)))
+        logging.debug("secret number length in decrypt: {}".
+                      format(len(self.secret_numbers)))
         # looping through original csv dict
         for num in self.get_secret_numbers(self.get_orig_dict()):
             for k, v in self.sec_kw_dict.items():

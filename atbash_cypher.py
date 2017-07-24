@@ -39,7 +39,6 @@ class Atbash(Cipher):
             for k, v in atbash_originals.items():
                 if v == atbash_datum:
                     atb_index.extend([k])
-
         # making otp shift
         otp_shifted_index = pad.otp_shifts(atb_index, self.otp)
         for datum in otp_shifted_index:
@@ -60,7 +59,6 @@ class Atbash(Cipher):
                 if v == letter:
                     incoming_atbash_index.append(k)
         otp_adjusted_index = pad.otp_shifts(incoming_atbash_index, self.otp)
-
         # adjusting otp shift
         for adjusted_index in otp_adjusted_index:
             for k, v in originals.items():
@@ -69,6 +67,5 @@ class Atbash(Cipher):
                         adjusted_atbash_letters.append(" ")
                     else:
                         adjusted_atbash_letters.append(k)
-
         return ''.join(adjusted_atbash_letters)
 
