@@ -9,12 +9,10 @@ class Cipher:
     """
     Super class
     """
-
     orig_dict = {}
 
     def __init__(self, secret_string, *args, **kwargs):
         # Checking the length of secret string list.
-
         if len(secret_string) < 1:
             raise ValueError("Secret string cannot be empty")
         self.secret_string = secret_string
@@ -24,8 +22,6 @@ class Cipher:
                 del self.secret_string[self.index]
                 self.secret_string.insert(self.index, "_")
             self.index += 1
-        print("incoming String : {} ".format(self.secret_string))
-
         # Reading original positions from user fed csv file.
         with open("original_assigned.csv", "r") as orig_csv:
             reader = csv.DictReader(orig_csv)

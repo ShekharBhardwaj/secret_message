@@ -78,13 +78,15 @@ class Main:
         This is keyword controller
         :param choices_dict:
         """
-        print("You have selected {}, awesome choice.".format(self.cipher_avail[int(choices_dict.get("cipher_choice"))]))
+        print("You have selected {}, awesome choice.".
+              format(self.cipher_avail[int(choices_dict.get("cipher_choice"))]))
         con_cho = choices_dict.get("conversion_choice")
         usr_otp = list(choices_dict.get("user_otp"))
         # condition for encryption
         if con_cho == "E":
             con_str = list(choices_dict.get("conversion_string").upper())
-            kw = keyword.Keyword(con_str, one_time_pad.Otp([int(num) for num in usr_otp]).get_otp(choices_dict))
+            kw = keyword.Keyword(con_str, one_time_pad.Otp([int(num) for num in usr_otp]).
+                                 get_otp(choices_dict))
             if choices_dict.get("fiver_display") == "N":
                 print("Your encrypted message: {}".format(kw.encrypt))
             else:
@@ -93,72 +95,89 @@ class Main:
         elif con_cho == "D":
             con_str = list(choices_dict.get("conversion_string"))
             if choices_dict.get("fiver_display") == "N":
-                kw = keyword.Keyword(con_str, one_time_pad.Otp([int(num) for num in usr_otp]).get_otp(choices_dict))
+                kw = keyword.Keyword(con_str, one_time_pad.Otp([int(num) for num in usr_otp]).
+                                     get_otp(choices_dict))
             else:
                 space_removed = self.remove_blocks_of_five(con_str)
                 kw = keyword.Keyword(space_removed,
-                                     one_time_pad.Otp([int(num) for num in usr_otp]).get_otp(choices_dict))
+                                     one_time_pad.Otp([int(num) for num in usr_otp]).
+                                     get_otp(choices_dict))
             # TODO: possible memory leak find out why ?
-            print("Your decrypted message: {}".format(kw.decrypt[:len(space_removed)]))
+            print("Your decrypted message: {}".
+                  format(kw.decrypt[:len(space_removed)]))
         else:
-            raise ValueError("'{}' is not a valid choice, you can either (E)ncrypt or (D)ecrypt.".format(con_cho))
+            raise ValueError("'{}' is not a valid choice, you can either (E)ncrypt or (D)ecrypt.".
+                             format(con_cho))
 
     def affine(self, choices_dict):
         """
         This is Affine controller
         :param choices_dict:
         """
-        print("You have selected {}, awesome choice.".format(self.cipher_avail[int(choices_dict.get("cipher_choice"))]))
+        print("You have selected {}, awesome choice.".
+              format(self.cipher_avail[int(choices_dict.get("cipher_choice"))]))
         con_cho = choices_dict.get("conversion_choice")
         usr_otp = list(choices_dict.get("user_otp"))
         # condition for encryption
         if con_cho == "E":
             con_str = list(choices_dict.get("conversion_string").upper())
-            aff = affine.Affine(con_str, one_time_pad.Otp([int(num) for num in usr_otp]).get_otp(choices_dict))
+            aff = affine.Affine(con_str, one_time_pad.Otp([int(num) for num in usr_otp]).
+                                get_otp(choices_dict))
             if choices_dict.get("fiver_display") == "N":
-                print("Your affine encrypted message: {}".format(aff.encrypt))
+                print("Your affine encrypted message: {}".
+                      format(aff.encrypt))
             else:
-                print("Your affine encrypted message: {}".format(" ".join(self.block_of_five(aff.encrypt))))
+                print("Your affine encrypted message: {}".
+                      format(" ".join(self.block_of_five(aff.encrypt))))
         # condition for decryption
         elif con_cho == "D":
             con_str = list(choices_dict.get("conversion_string").upper())
             if choices_dict.get("fiver_display") == "N":
-                aff = affine.Affine(con_str, one_time_pad.Otp([int(num) for num in usr_otp]).get_otp(choices_dict))
+                aff = affine.Affine(con_str, one_time_pad.Otp([int(num) for num in usr_otp]).
+                                    get_otp(choices_dict))
             else:
                 space_removed = self.remove_blocks_of_five(con_str)
                 aff = affine.Affine(space_removed,
-                                    one_time_pad.Otp([int(num) for num in usr_otp]).get_otp(choices_dict))
+                                    one_time_pad.Otp([int(num) for num in usr_otp]).
+                                    get_otp(choices_dict))
             print("Your decrypted message: {}".format(aff.decrypt))
         else:
-            raise ValueError("'{}' is not a valid choice, you can either (E)ncrypt or (D)ecrypt.".format(con_cho))
+            raise ValueError("'{}' is not a valid choice, you can either (E)ncrypt or (D)ecrypt.".
+                             format(con_cho))
 
     def atbash(self, choices_dict):
         """
         This is Atbash controller
         :param choices_dict:
         """
-        print("You have selected {}, awesome choice.".format(self.cipher_avail[int(choices_dict.get("cipher_choice"))]))
+        print("You have selected {}, awesome choice.".
+              format(self.cipher_avail[int(choices_dict.get("cipher_choice"))]))
         con_cho = choices_dict.get("conversion_choice")
         usr_otp = list(choices_dict.get("user_otp"))
         # condition for encryption
         if con_cho == "E":
             con_str = list(choices_dict.get("conversion_string").upper())
-            atb = atbash.Atbash(con_str, one_time_pad.Otp([int(num) for num in usr_otp]).get_otp(choices_dict))
+            atb = atbash.Atbash(con_str, one_time_pad.Otp([int(num) for num in usr_otp]).
+                                get_otp(choices_dict))
             if choices_dict.get("fiver_display") == "N":
                 print("Your affine encrypted message: {}".format(atb.encrypt))
             else:
-                print("Your affine encrypted message: {}".format(" ".join(self.block_of_five(atb.encrypt))))
+                print("Your affine encrypted message: {}".
+                      format(" ".join(self.block_of_five(atb.encrypt))))
         # condition for decryption
         elif con_cho == "D":
             con_str = list(choices_dict.get("conversion_string").upper())
             if choices_dict.get("fiver_display") == "N":
-                atb = atbash.Atbash(con_str, one_time_pad.Otp([int(num) for num in usr_otp]).get_otp(choices_dict))
+                atb = atbash.Atbash(con_str, one_time_pad.Otp([int(num) for num in usr_otp]).
+                                    get_otp(choices_dict))
             else:
                 atb = atbash.Atbash(self.remove_blocks_of_five(con_str),
-                                    one_time_pad.Otp([int(num) for num in usr_otp]).get_otp(choices_dict))
+                                    one_time_pad.Otp([int(num) for num in usr_otp]).
+                                    get_otp(choices_dict))
             print("Your decrypted message: {}".format(atb.decrypt))
         else:
-            raise ValueError("'{}' is not a valid choice, you can either (E)ncrypt or (D)ecrypt.".format(con_cho))
+            raise ValueError("'{}' is not a valid choice, you can either (E)ncrypt or (D)ecrypt.".
+                             format(con_cho))
 
     def switch(self, choices_dict):
         """
@@ -176,9 +195,6 @@ class Main:
         else:
             raise ValueError("{}, is not a valid cipher, please select only the exiting cipher code"
                              .format(choices_dict.get("cipher_choice")))
-
-
-
 
 
 if __name__ == "__main__":
